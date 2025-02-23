@@ -34,7 +34,7 @@ export class CardController {
   }
 
   // Get a specific card profile by ID
-  @Get(':id')
+  @Get(':id/profile')
   getCardProfile(@Param('id') id: string) {
     return this.cardService.findOne(id);
   }
