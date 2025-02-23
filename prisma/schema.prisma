@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CardRequest {
+  id           String     @id @default(uuid())
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @updatedAt
+  branch_name  String
+  initiator    String
+  card_type    CardType
+  card_charges Int
+  quantity     Int
+  batch        String
+  status       CardStatus
+}
+
+model CardProfile {
+  id               String          @id @default(uuid())
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @updatedAt
+  card_name        String
+  bin_prefix       String
+  card_scheme      CardScheme
+  expiration       DateTime
+  description      String
+  currency         Currency
+  branch_blacklist BranchBlackList
+
+  fees Fees[] @relation("CardFees")
+}
+
+model Fees {
+  id            String       @id @default(uuid())
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+  card_id       String
+  name          String
+  value         Int
+  currency      Currency
+  fee_frequency FeeFrequency
+  fee_impact    FeeImpact
+  account_paid  AccountPaid
+  account       Int
+
+  CardProfile CardProfile @relation("CardFees", fields: [card_id], references: [id], onDelete: Cascade)
+}
+
+enum CardScheme {
+  VISA
+  MASTERCARD
+}
+
+enum FeeFrequency {
+  MONTHLY
+  ONE_OFF
+}
+
+enum FeeImpact {
+  ISSUANCE
+  FEE_REISSUE
+}
+
+enum AccountPaid {
+  BRANCH_CODE_PREFIX
+  BRANCH_CODE_SUFFIX
+  NONE
+}
+
+enum Currency {
+  NGN
+  USD
+  EUR
+}
+
+enum CardStatus {
+  PENDING
+  IN_PROGRESS
+  READY
+  ACKNOWLEDGED
+}
+
+enum CardType {
+  CLASSIC_DEBIT
+  CLASSIC_CREDIT
+}
+
+enum BranchBlackList {
+  HEAD_OFFICE
+  LAGOS_OFFICE
+  ABUJA_OFFICE
+}

@@ -1,0 +1,21 @@
+services:
+  core-infra-db:
+    image: postgres:15
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: core_db
+    networks:
+      - core_infra
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+networks:
+  core_infra:
+    name: core_infra
+
+volumes:
+  postgres:
+    name: core_infra-postgres-db
