@@ -29,7 +29,6 @@ async function main() {
             description: 'A standard debit card for everyday transactions.',
             currency: Currency.NGN,
             branch_blacklist: BranchBlackList.HEAD_OFFICE,
-            status: CardStatus.ACKNOWLEDGED,
         },
         {
             id: uuidv4(),
@@ -42,7 +41,6 @@ async function main() {
             description: 'Exclusive platinum credit card with rewards.',
             currency: Currency.USD,
             branch_blacklist: BranchBlackList.ABUJA_OFFICE,
-            status: CardStatus.IN_PROGRESS,
         },
         {
             id: uuidv4(),
@@ -55,7 +53,6 @@ async function main() {
             description: 'Premium debit card with additional benefits.',
             currency: Currency.EUR,
             branch_blacklist: BranchBlackList.LAGOS_OFFICE,
-            status: CardStatus.READY,
         },
         {
             id: uuidv4(),
@@ -68,7 +65,6 @@ async function main() {
             description: 'A cost-effective card with essential features.',
             currency: Currency.NGN,
             branch_blacklist: BranchBlackList.ABUJA_OFFICE,
-            status: CardStatus.IN_PROGRESS,
         },
         {
             id: uuidv4(),
@@ -81,7 +77,6 @@ async function main() {
             description: 'Exclusive elite credit card for VIPs.',
             currency: Currency.USD,
             branch_blacklist: BranchBlackList.HEAD_OFFICE,
-            status: CardStatus.PENDING,
         },
     ];
 
